@@ -1,0 +1,13 @@
+{
+    "entryPoints": ["src/components/*.ts"],
+    "exclude": ["**/node_modules/**/*", "**/build/**/*"],
+    "out": "docs",
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "tsconfig": "tsconfig.json",
+    "name": "Frontend",
+    "readme": "README.md",
+    "disableSources": true,
+    "theme": "default"
+  }
+  

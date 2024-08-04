@@ -1,0 +1,1109 @@
+openapi: 3.0.1
+info:
+  title: My Jakarta EE API
+  version: 1.0.0
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The book ID
+        isbn:
+          type: string
+          description: The book ISBN
+        author:
+          type: string
+          description: The book author
+        title:
+          type: string
+          description: The book title
+        year:
+          type: integer
+          format: int64
+          description: The book year of publication
+        publisher:
+          type: string
+          description: The book publisher
+        domain:
+          type: string
+          description: The book domain
+      required:
+        - id
+        - isbn
+        - author
+        - title
+        - author
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The user ID
+        login:
+          type: string
+          description: The user login
+        password:
+          type: string
+          description: The user password
+        fname:
+          type: string
+          description: The user first name
+        lname:
+          type: string
+          description: The user last name
+        email:
+          type: string
+          description: The user email
+        phone:
+          type: string
+          description: The user phone number
+        ismoderator:
+          type: boolean
+          description: The user moderator status
+      required:
+        - id
+        - login
+        - password
+        - fname
+        - lname
+        - email
+        - phone
+        - ismoderator
+    Advertisement:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The advertisement ID
+        user_id:
+          type: integer
+          format: int64
+          description: The user ID
+        book_id:
+          type: integer
+          format: int64
+          description: The book ID
+        date_added:
+          type: string
+          format: date-time
+          description: The date the advertisement was added
+        message:
+          type: string
+          description: The advertisement message
+        type:
+          type: string
+          description: The advertisement type
+        receiver_id:
+          type: integer
+          format: int64
+          description: The receiver ID
+        date_finished:
+          type: string
+          format: date-time
+          description: The date the advertisement was finished
+        status:
+          type: string
+          description: The advertisement status
+      required:
+        - id
+        - user_id
+        - book_id
+        - date_added
+        - message
+        - type
+        - receiver_id
+        - date_finished
+        - status
+    Rating:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The rating ID
+        user_id:
+          type: integer
+          format: int64
+          description: The user ID
+        book_id:
+          type: integer
+          format: int64
+          description: The book ID
+        date_added:
+          type: string
+          format: date-time
+          description: The date the rating was added
+        rating:
+          type: integer
+          format: int64
+          description: The rating
+        comment:
+          type: string
+          description: The comment added to the rating
+      required:
+        - id
+        - user_id
+        - book_id
+        - date_added
+        - rating
+        - comment
+    BooksComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The object ID
+        user_id:
+          type: integer
+          format: int64
+          description: The user ID
+        book_id:
+          type: integer
+          format: int64
+          description: The book ID
+        comment:
+          type: string
+          description: The comment added to the book
+      required:
+        - id
+        - user_id
+        - book_id
+        - comment
+    OffersComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The object ID
+        user_id:
+          type: integer
+          format: int64
+          description: The user ID
+        request_id:
+          type: integer
+          format: int64
+          description: The request ID
+        comment:
+          type: string
+          description: The comment added to the request
+      required:
+        - id
+        - user_id
+        - request_id
+        - comment
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  /api/hello:
+    get:
+      tags:
+        - hello
+      summary: Returns a hello message
+      responses:
+        '200':
+          description: A hello message
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /api/book:
+    get:
+      tags:
+        - book
+      summary: Returns a list of books
+      responses:
+        '200':
+          description: A list of books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    post:
+      tags:
+        - book
+      summary: Adds a new book to the database
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        description: Book object to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: The added book
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+  /api/book/name/{name}:
+      get:
+        tags:
+          - book
+        parameters:
+              - in: path
+                name: name
+                schema:
+                  type: string
+                required: true
+                description: Name of the book to retrieve
+        summary: Returns a book by name
+        responses:
+            '200':
+              description: A book
+              content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/Book'
+            '404':
+              description: The book was not found
+              content:
+                  text/plain:
+                    schema:
+                      type: string
+  /api/book/{id}:
+    get:
+      tags:
+        - book
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: The book ID
+      summary: Returns a book by ID
+      responses:
+        '200':
+          description: A book
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: The book was not found
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /api/book/status/{value}:
+      get:
+        tags:
+          - book
+        parameters:
+              - in: path
+                name: value
+                schema:
+                  type: string
+                required: true
+                description: Status of the book to retrieve
+        summary: Returns a list of books by status
+        security:
+          - bearerAuth: []
+        responses:
+            '200':
+              description: A list of books
+              content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Book'
+            '404':
+              description: The book was not found
+              content:
+                  text/plain:
+                    schema:
+                      type: string
+  /api/book/author/{author}:
+      get:
+        tags:
+          - book
+        parameters:
+              - in: path
+                name: author
+                schema:
+                  type: string
+                required: true
+                description: Author of the book to retrieve
+        summary: Returns a list of books by author
+        security:
+          - bearerAuth: []
+        responses:
+            '200':
+              description: A list of books
+              content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Book'
+            '404':
+              description: The book was not found
+              content:
+                  text/plain:
+                    schema:
+                      type: string
+  /api/book/year/{year}&sort={type}&page={page}&size={size}:
+        get:
+            tags:
+            - book
+            parameters:
+                - in: path
+                  name: year
+                  schema:
+                    type: integer
+                  required: true
+                  description: Year of the book to retrieve
+                - in: path
+                  name: type
+                  schema:
+                    type: string
+                  required: true
+                  description: Type of sorting
+                - in: path
+                  name: page
+                  schema:
+                    type: integer
+                  required: true
+                  description: Page number
+                - in: path
+                  name: size
+                  schema:
+                    type: integer
+                  required: true
+                  description: Number of books per page
+            summary: Returns a list of books by year
+            security:
+            - bearerAuth: []
+            responses:
+                '200':
+                  description: A list of books
+                  content:
+                      application/json:
+                        schema:
+                          type: array
+                          items:
+                              $ref: '#/components/schemas/Book'
+                '404':
+                  description: The book was not found
+                  content:
+                      text/plain:
+                          schema:
+                            type: string
+  /api/rating:
+    get:
+      tags:
+        - rating
+      summary: Returns a list of ratings
+      responses:
+        '200':
+          description: A list of ratings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rating'
+    post:
+      tags:
+        - rating
+      summary: Adds a new rating to the database
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        description: Rating object to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rating'
+      responses:
+        '200':
+          description: The added rating
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rating'
+  /api/rated/{userId}:
+        get:
+            tags:
+            - rating
+            parameters:
+                - in: path
+                  name: userId
+                  schema:
+                    type: integer
+                    format: int64
+                    required: true
+                  description: User ID of the rating to retrieve
+            summary: Returns a list of ratings by user ID
+            responses:
+                '200':
+                  description: A list of ratings
+                  content:
+                    application/json:
+                        schema:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Rating'
+                '404':
+                  description: The rating was not found
+                  content:
+                    text/plain:
+                        schema:
+                          type: string
+  /api/rating/book/{book_id}:
+      get:
+        tags:
+          - rating
+        parameters:
+              - in: path
+                name: book_id
+                schema:
+                  type: integer
+                  format: int64
+                required: true
+                description: Book ID of the rating to retrieve
+        summary: Returns a list of ratings by book ID
+        responses:
+            '200':
+              description: A list of ratings
+              content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Rating'
+            '404':
+              description: The rating was not found
+              content:
+                  text/plain:
+                    schema:
+                      type: string
+  /api/rating/user/{user_id}:
+      get:
+        tags:
+          - rating
+        parameters:
+              - in: path
+                name: user_id
+                schema:
+                  type: integer
+                  format: int64
+                required: true
+                description: User ID of the rating to retrieve
+        security:
+          - bearerAuth: [ ]
+        summary: Returns a list of ratings by user ID
+        responses:
+            '200':
+              description: A list of ratings
+              content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Rating'
+            '404':
+              description: The rating was not found
+              content:
+                  text/plain:
+                    schema:
+                      type: string
+  /api/book/rating/{rating}&sort={type}&page={page}&size={size}:
+        get:
+            tags:
+            - rating
+            parameters:
+                - in: path
+                  name: rating
+                  schema:
+                    type: integer
+                  required: true
+                  description: Rating of the book to retrieve
+                - in: path
+                  name: type
+                  schema:
+                    type: string
+                  required: true
+                  description: Type of sorting
+                - in: path
+                  name: page
+                  schema:
+                    type: integer
+                  required: true
+                  description: Page number
+                - in: path
+                  name: size
+                  schema:
+                    type: integer
+                  required: true
+                  description: Number of books per page
+            summary: Returns a list of books by rating
+            security:
+            - bearerAuth: []
+            responses:
+                '200':
+                  description: A list of books
+                  content:
+                      application/json:
+                        schema:
+                          type: array
+                          items:
+                              $ref: '#/components/schemas/Book'
+                '404':
+                  description: The book was not found
+                  content:
+                      text/plain:
+                          schema:
+                            type: string
+  /api/bookscomment:
+    get:
+      tags:
+        - books comment
+      summary: Returns a list of books comments
+      responses:
+        '200':
+          description: A list of books comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BooksComment'
+    post:
+      tags:
+        - books comment
+      summary: Adds a new book comment to the database
+      requestBody:
+        description: Book comment to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BooksComment'
+      responses:
+        '200':
+          description: The added comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BooksComment'
+  /api/bookscomment/user/{userId}:
+    get:
+      tags:
+        - books comment
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: User ID of the comment to retrieve
+      summary: Returns a list of comments by user ID
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BooksComment'
+        '404':
+          description: The comment was not found
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /api/offerscomment:
+    get:
+      tags:
+        - offers comment
+      summary: Returns a list of offers comments
+      responses:
+        '200':
+          description: A list of offers comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OffersComment'
+    post:
+      tags:
+        - offers comment
+      summary: Adds a new offer comment to the database
+      requestBody:
+        description: Offer comment to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OffersComment'
+      responses:
+        '200':
+          description: The added comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffersComment'
+  /api/offerscomment/user/{userId}:
+    get:
+      tags:
+        - offers comment
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: User ID of the offers comment to retrieve
+      summary: Returns a list of offers comments by user ID
+      responses:
+        '200':
+          description: A list of offers comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OffersComment'
+        '404':
+          description: The offers comment was not found
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/bookscomment/book/{bookId}:
+    get:
+      tags:
+        - books comment
+      parameters:
+        - in: path
+          name: bookId
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: Book ID of the comment to retrieve
+      summary: Returns a list of comments by book ID
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BooksComment'
+        '404':
+          description: The comment was not found
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/offerscomment/offer/{offerId}:
+    get:
+      tags:
+        - offers comment
+      parameters:
+        - in: path
+          name: offerId
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: Offer ID of the offers comment to retrieve
+      summary: Returns a list of offers comments by offer ID
+      responses:
+        '200':
+          description: A list of offers comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OffersComment'
+        '404':
+          description: The offers comment was not found
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/auth/login:
+    post:
+      tags:
+        - login
+      summary: Logs in a user
+      requestBody:
+        description: User credentials
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: A JWT token and userId
+          content:
+            json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  refreshToken:
+                    type: string
+                  userId:
+                    type: integer
+                  avatar:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid credentials
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/auth/logout:
+    post:
+      tags:
+        - logout
+      summary: Logs out a user
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: User logged out
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/auth/update/{login}:
+    post:
+      tags:
+        - update
+      summary: Updates a user
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: login
+          schema:
+            type: string
+          required: true
+          description: Login of the user to update
+      requestBody:
+        description: User credentials
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: User not found
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/auth/user/info:
+    get:
+      tags:
+        - user
+      summary: Returns a user info
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: A user info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /api/auth/user/info/{login}:
+    get:
+      tags:
+        - user
+      summary: Returns a user info
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: login
+          schema:
+            type: string
+          required: true
+          description: Login of the user to return
+      responses:
+        '200':
+          description: A user info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /api/auth/user/info/id/{id}:
+    get:
+      tags:
+        - user
+      summary: Returns a user info
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id of the user to return
+      responses:
+        '200':
+          description: A user info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /api/auth/refresh:
+    post:
+      tags:
+        - refresh
+      summary: Refreshes a JWT token
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: A new JWT token
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/register:
+    post:
+      tags:
+        - register
+      summary: Registers a new user
+      requestBody:
+        description: User credentials
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User registered
+          content:
+            text/plain:
+              schema:
+                type: string
+        '409':
+          description: User already exists
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/advertisement:
+    get:
+      tags:
+        - advertisement
+      summary: Returns a list of advertisements
+      responses:
+        '200':
+          description: A list of advertisements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Advertisement'
+    post:
+      tags:
+        - advertisement
+      summary: Adds a new advertisement to the database
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        description: "Record added successfully!"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Advertisement'
+      responses:
+        '200':
+          description: Record added successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Advertisement'
+  /api/advertisement/{id}:
+    get:
+      tags:
+        - advertisement
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the advertisement to retrieve
+      summary: Returns an advertisement by id
+      responses:
+        '200':
+          description: An advertisement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Advertisement'
+        '404':
+          description: The advertisement was not found
+          content:
+            text/plain:
+              schema:
+                type: string
+    patch:
+        tags:
+            - advertisement
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: integer
+              required: true
+              description: ID of the advertisement to update
+        summary: Updates an advertisement
+        security:
+            - bearerAuth: [ ]
+        requestBody:
+            description: Advertisement object to be updated
+            content:
+              application/json:
+                  schema:
+                    $ref: '#/components/schemas/Advertisement'
+        responses:
+            '200':
+              description: Advertisement updated
+              content:
+                  text/plain:
+                    schema:
+                      type: string
+            '404':
+              description: Advertisement not found
+              content:
+                  text/plain:
+                    schema:
+                      type: string
+  /api/advertisement/page={page}&size={size}:
+    get:
+      tags:
+        - advertisement
+      parameters:
+        - in: path
+          name: page
+          schema:
+            type: integer
+          required: true
+          description: Page number
+        - in: path
+          name: size
+          schema:
+            type: integer
+          required: true
+          description: Page size
+      summary: Returns a list of advertisements
+      responses:
+        '200':
+          description: A list of advertisements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Advertisement'
+  /api/user/update/avatar/{id}:
+    post:
+      tags:
+        - user
+      summary: Updates a user avatar
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of the user to update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: User avatar
+      responses:
+        '200':
+          description: User avatar updated
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: User not found
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid avatar
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/book/user/{userId}:
+    get:
+      tags:
+        - book
+      summary: Returns a list of books by user id
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+          description: ID of the user to retrieve books
+      responses:
+        '200':
+          description: A list of books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'

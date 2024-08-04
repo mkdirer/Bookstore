@@ -1,0 +1,95 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    container_name: br_database
+    networks:
+      - database-server
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./setup/DB_script/erd.sql:/docker-entrypoint-initdb.d/erd.sql
+#      - postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    privileged: true
+
+  pdadmin:
+    image: dpage/pgadmin4
+    restart: always
+    networks:
+      - database-server
+    ports:
+      - "81:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: example@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: example
+      PGADMIN_SERVER_MODE: 'True'
+      PGADMIN_SERVER_JSON_FILE: /pgadmin4/servers.json
+    volumes:
+      - ./setup/servers.json:/pgadmin4/servers.json
+    depends_on:
+      - db
+    links:
+      - db
+    privileged: true
+
+  tomee:
+    build:
+      dockerfile: tomee.Dockerfile
+      context: '.'
+    container_name: br_backend
+    networks:
+      - database-server
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./target/br_backend-1.0-SNAPSHOT.war:/usr/local/tomee/webapps/br_backend-1.0-SNAPSHOT.war
+    privileged: true
+
+#  tomcat:
+#    build:
+#      dockerfile: tomcat.Dockerfile
+#      context: '.'
+#    networks:
+#      - database-server
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - ./target/br_backend-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/br_backend-1.0-SNAPSHOT.war
+#    privileged: true
+
+  python:
+    image: python
+    networks:
+      - database-server
+    volumes:
+      - ./setup/DB_script:/tmp/
+    command:
+      sh -c "pip install -r /tmp/requirements.txt && python /tmp/BN_script.py"
+    privileged: true
+
+#  jenkins:
+#    image: jenkins/jenkins:lts
+#    ports:
+#      - "8080:8080"
+#      - "50000:50000"
+#    volumes:
+#      - jenkins_home:/var/jenkins_home
+#    environment:
+#      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+#      - JENKINS_OPTS=--prefix=/jenkins
+#    restart: always
+#    privileged: true
+
+volumes:
+  postgres:
+#  jenkins_home:
+
+networks:
+  database-server:

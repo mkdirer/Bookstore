@@ -1,0 +1,1128 @@
+{
+	"info": {
+		"_postman_id": "3dc9d277-44e1-4f91-b848-e795fd79b642",
+		"name": "Book-Rating",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AdvertismentResource",
+			"item": [
+				{
+					"name": "/api/advertisement",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookId\": 1,\r\n    \"message\": \"test\",\r\n    \"type\": 1,\r\n    \"userId\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/advertisement",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"advertisement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/advertisement/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"bookId\": 2,\r\n    \"dateAdded\": \"2023-06-19\",\r\n    \"message\": \"Amazing book for exchange!\",\r\n    \"type\": 2,\r\n    \"receiverId\": 2,\r\n    \"price\": 2.00,\r\n    \"dateFinished\": \"2023-06-19\",\r\n    \"status\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/advertisement/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"advertisement",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/advertisement",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/advertisement",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"advertisement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/advertisement/page=3&size=3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/advertisement?page=1&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"advertisement"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/advertisement/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/advertisement/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"advertisement",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthResource",
+			"item": [
+				{
+					"name": "/api/auth/login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"login\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/auth/refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc01vZGVyYXRvciI6dHJ1ZSwiaXNzIjoiQm9vayBSYXRpbmciLCJsb2dpbiI6ImFkbWluIiwiZXhwIjoxNjg3MTc1NjM0fQ.83cUFXAx8Gr1MGbx6oObwSWbCtWeCImQmF5eg6F-6jY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/auth/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/auth/logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc01vZGVyYXRvciI6dHJ1ZSwiaXNzIjoiQm9vayBSYXRpbmciLCJsb2dpbiI6ImFkbWluIiwiZXhwIjoxNjg3MTc1NjM0fQ.83cUFXAx8Gr1MGbx6oObwSWbCtWeCImQmF5eg6F-6jY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/auth/update/user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fname\": \"admin1\",\r\n  \"lname\": \"admin1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/auth/update/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"auth",
+								"update",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/auth/user/info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/auth/user/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"auth",
+								"user",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/auth/user/info/admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/auth/user/info/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"auth",
+								"user",
+								"info",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/auth/user/info/id/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/auth/user/info/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"auth",
+								"user",
+								"info",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BooksComments",
+			"item": [
+				{
+					"name": "/api/bookscomment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/bookscomment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"bookscomment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/bookscomment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 3,\r\n  \"userId\": 1,\r\n  \"bookId\": 1,\r\n  \"comment\": \"To jest mój komentarz.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/bookscomment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"bookscomment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BooksResource",
+			"item": [
+				{
+					"name": "/api/book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/book",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isbn\": \"213742069\",\r\n    \"author\": \"Example Author\",\r\n    \"title\": \"Example Book\",\r\n    \"year\": 2022,\r\n    \"publisher\": \"Example Publisher\",\r\n    \"domain\": \"Example Domain\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/book",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/book/name/The Great Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/book/name/The Great Book",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"book",
+								"name",
+								"The Great Book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/book/author/Great Publisher",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/book/author/Jane Doe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"book",
+								"author",
+								"Jane Doe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/book/year/1999&sort=1&page=1&size=1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/book?year=2022&sort=greater&page=1&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"book"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2022"
+								},
+								{
+									"key": "sort",
+									"value": "greater"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/book/status/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/book/status/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"book",
+								"status",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/book/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/book/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"book",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OffersCommentsResource",
+			"item": [
+				{
+					"name": "/api/offerscomment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/offerscomment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"offerscomment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/offerscomment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"userId\": 1,\r\n    \"requestId\": 1,\r\n    \"comment\": \"Great Offer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/offerscomment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"offerscomment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RatingsResource",
+			"item": [
+				{
+					"name": "/api/rating",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/rating",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"rating"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/rating",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"userId\": 1,\r\n    \"bookId\": 1,\r\n    \"dateAdded\": \"2023-06-10\",\r\n    \"rating\": 5,\r\n    \"comment\": \"Great book! I really enjoyed reading it.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/rating",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"rating"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/rating/book/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/rating/book/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"rating",
+								"book",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/rating/user/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/rating/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"rating",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RegisterResource",
+			"item": [
+				{
+					"name": "/api/register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenPZ}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"mleczna bestia\",\r\n    \"password\": \"obibok\",\r\n    \"fname\": \"Krzysztof\",\r\n    \"lname\": \"Kononowicz\",\r\n    \"email\": \"mlecznabestia@szkolna.pl\",\r\n    \"phone\": \"+123 456 789\",\r\n    \"avatar\": \"goose\",\r\n    \"ismoderator\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"br_backend-1.0-SNAPSHOT",
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/api/hello-world",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenPZ}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "INSERT INTO \"public\".\"Books\" (isbn, author, title, \"year\", publisher, \"domain\") VALUES \r\n('978-3-16-148410-0', 'John Smith', 'The Great Book', 2021, 'Great Publisher', 'Fiction'),\r\n('978-1-40-289460-1', 'Jane Doe', 'Another Great Book', 2022, 'Another Publisher', 'Non-Fiction');\r\n\r\nINSERT INTO \"public\".\"OfferStatuses\" (id, name) VALUES \r\n(1, 'Pending'), \r\n(2, 'Accepted');\r\n\r\nINSERT INTO \"public\".\"OfferTypes\" (id, name) VALUES \r\n(1, 'Sale'), \r\n(2, 'Exchange');\r\n\r\nINSERT INTO \"public\".\"RequestStatuses\" (id, name) VALUES \r\n(1, 'Open'), \r\n(2, 'Closed');\r\n\r\nINSERT INTO \"public\".\"Users\" (login, password, fname, lname, email, phone, avatar, ismoderator) VALUES \r\n('user', 'ee11cbb19052e40b07aac0ca060c23ee', 'Krzysztof', 'Kononowicz', 'knur@choroszcza.com', '213769420', 'bed-bug', false),\r\n('admin', '21232f297a57a5a743894a0e4a801fc3', 'Major', 'Suchodolski', 'nitrobot@choroszcza.com', '213769420', 'goose', true);\r\n\r\nINSERT INTO \"public\".\"Offers\" (user_id, book_id, message, \"type\", status) VALUES \r\n(1, 1, 'Great book for sale!', 1, 1), \r\n(2, 2, 'Want to exchange this book!', 2, 2);\r\n\r\nINSERT INTO \"public\".\"Ratings\" (user_id, book_id, rating, \"comment\") VALUES \r\n(1, 1, 5, 'Great book!'), \r\n(2, 2, 4, 'Good book!');\r\n\r\nINSERT INTO \"public\".\"Requests\" (user_id, status, title, message) VALUES \r\n(1, 1, 'Need help with something', 'This is a help request.'),\r\n(2, 2, 'Need assistance', 'This is another help request.');\r\n\r\nINSERT INTO \"public\".\"BooksComments\" (user_id, book_id, comment) VALUES \r\n(1, 1, 'This is a comment on a book.'), \r\n(2, 2, 'This is another comment on a book.');\r\n\r\nINSERT INTO \"public\".\"OffersComments\" (user_id, request_id, comment) VALUES \r\n(1, 1, 'This is a comment on an offer.'), \r\n(2, 2, 'This is another comment on an offer.');"
+				},
+				"url": {
+					"raw": "http://localhost:8081/br_backend-1.0-SNAPSHOT/api/hello-world",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"br_backend-1.0-SNAPSHOT",
+						"api",
+						"hello-world"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

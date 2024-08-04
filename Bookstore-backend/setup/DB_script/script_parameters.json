@@ -1,0 +1,29 @@
+{
+  "API_URL": "https://data.bn.org.pl/api/institutions/bibs.json",
+  "MAX_ROWS_TO_PULL": 100,
+  "DB": {
+    "HOST": "br_database",
+    "USER": "postgres",
+    "PASS": "postgres",
+    "PORT": "5432",
+    "NAME": "postgres",
+    "TABLE": "Books",
+    "COLUMNS_TO_POPULATE": {
+        "isbnIssn": "str",
+        "author": "str",
+        "title": "str",
+        "publicationYear": "int",
+        "publisher": "str",
+        "domain": "str"
+      },
+    "COLUMNS_IN_TABLE": [
+      "isbn", "author", "title", "year", "publisher", "domain"
+    ]
+  },
+  "API_PARAMS": {
+    "limit": 100,
+    "kind": "książka",
+    "language": "polski",
+    "domain": "Informatyka i technologie informacyjne"
+  }
+}
